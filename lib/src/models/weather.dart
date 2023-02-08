@@ -1,42 +1,98 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'weather.freezed.dart';
-
 part 'weather.g.dart';
 
 @freezed
-class WeatherParams with _$WeatherParams {
-  factory WeatherParams({
-    required double temp,
-    @JsonKey(name: 'temp_min') required double tempMin,
-    @JsonKey(name: 'temp_max') required double tempMax,
-  }) = _WeatherParams;
+class Weather with _$Weather {
+  const factory Weather({
+    Coord? coord,
+    List<WeatherInfo>? weather,
+    String? base,
+    Main? main,
+    int? visibility,
+    Wind? wind,
+    Clouds? clouds,
+    int? dt,
+    Sys? sys,
+    int? timezone,
+    int? id,
+    String? name,
+    int? cod,
+  }) = _Weather;
 
-  factory WeatherParams.fromJson(Map<String, dynamic> json) =>
-      _$WeatherParamsFromJson(json);
+  factory Weather.fromJson(Map<String, dynamic> json) =>
+      _$WeatherFromJson(json);
+}
+
+@freezed
+class Coord with _$Coord {
+  const factory Coord({
+    double? lon,
+    double? lat,
+  }) = _Coord;
+
+  factory Coord.fromJson(Map<String, dynamic> json) => _$CoordFromJson(json);
 }
 
 @freezed
 class WeatherInfo with _$WeatherInfo {
-  factory WeatherInfo({
-    required String main,
-    required String description,
-    required String icon,
+  const factory WeatherInfo({
+    int? id,
+    String? main,
+    String? description,
+    String? icon,
   }) = _WeatherInfo;
 
   factory WeatherInfo.fromJson(Map<String, dynamic> json) =>
       _$WeatherInfoFromJson(json);
 }
 
-/// Weather data parsed from the API response (not used directly in the UI)
 @freezed
-class Weather with _$Weather {
-  factory Weather({
-    @JsonKey(name: 'main') required WeatherParams weatherParams,
-    @JsonKey(name: 'weather') required List<WeatherInfo> weatherInfo,
-    required int dt,
-  }) = _Weather;
+class Main with _$Main {
+  const factory Main({
+    double? temp,
+    double? feels_like,
+    double? temp_min,
+    double? temp_max,
+    int? pressure,
+    int? humidity,
+    int? sea_level,
+    int? grnd_level,
+  }) = _Main;
 
-  factory Weather.fromJson(Map<String, dynamic> json) =>
-      _$WeatherFromJson(json);
+  factory Main.fromJson(Map<String, dynamic> json) => _$MainFromJson(json);
+}
+
+@freezed
+class Wind with _$Wind {
+  const factory Wind({
+    double? speed,
+    int? deg,
+    double? gust,
+  }) = _Wind;
+
+  factory Wind.fromJson(Map<String, dynamic> json) => _$WindFromJson(json);
+}
+
+@freezed
+class Clouds with _$Clouds {
+  const factory Clouds({
+    int? all,
+  }) = _Clouds;
+
+  factory Clouds.fromJson(Map<String, dynamic> json) => _$CloudsFromJson(json);
+}
+
+@freezed
+class Sys with _$Sys {
+  const factory Sys({
+    int? type,
+    int? id,
+    String? country,
+    int? sunrise,
+    int? sunset,
+  }) = _Sys;
+
+  factory Sys.fromJson(Map<String, dynamic> json) => _$SysFromJson(json);
 }

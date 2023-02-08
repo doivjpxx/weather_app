@@ -16,4 +16,15 @@ class WeatherService {
       rethrow;
     }
   }
+
+  Future<Map<String, dynamic>> getWeatherDaily(String cityName) async {
+    try {
+      final url = '${Endpoints.weatherDaily}&q=$cityName';
+      final res = await _dioClient.get(url);
+
+      return res.data;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
