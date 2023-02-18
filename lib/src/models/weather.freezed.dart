@@ -33,6 +33,7 @@ mixin _$Weather {
   int? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   int? get cod => throw _privateConstructorUsedError;
+  String? get dt_txt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -57,7 +58,8 @@ abstract class $WeatherCopyWith<$Res> {
       int? timezone,
       int? id,
       String? name,
-      int? cod});
+      int? cod,
+      String? dt_txt});
 
   $CoordCopyWith<$Res>? get coord;
   $MainCopyWith<$Res>? get main;
@@ -92,6 +94,7 @@ class _$WeatherCopyWithImpl<$Res, $Val extends Weather>
     Object? id = freezed,
     Object? name = freezed,
     Object? cod = freezed,
+    Object? dt_txt = freezed,
   }) {
     return _then(_value.copyWith(
       coord: freezed == coord
@@ -146,6 +149,10 @@ class _$WeatherCopyWithImpl<$Res, $Val extends Weather>
           ? _value.cod
           : cod // ignore: cast_nullable_to_non_nullable
               as int?,
+      dt_txt: freezed == dt_txt
+          ? _value.dt_txt
+          : dt_txt // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -230,7 +237,8 @@ abstract class _$$_WeatherCopyWith<$Res> implements $WeatherCopyWith<$Res> {
       int? timezone,
       int? id,
       String? name,
-      int? cod});
+      int? cod,
+      String? dt_txt});
 
   @override
   $CoordCopyWith<$Res>? get coord;
@@ -267,6 +275,7 @@ class __$$_WeatherCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? cod = freezed,
+    Object? dt_txt = freezed,
   }) {
     return _then(_$_Weather(
       coord: freezed == coord
@@ -321,6 +330,10 @@ class __$$_WeatherCopyWithImpl<$Res>
           ? _value.cod
           : cod // ignore: cast_nullable_to_non_nullable
               as int?,
+      dt_txt: freezed == dt_txt
+          ? _value.dt_txt
+          : dt_txt // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -341,7 +354,8 @@ class _$_Weather implements _Weather {
       this.timezone,
       this.id,
       this.name,
-      this.cod})
+      this.cod,
+      this.dt_txt})
       : _weather = weather;
 
   factory _$_Weather.fromJson(Map<String, dynamic> json) =>
@@ -381,10 +395,12 @@ class _$_Weather implements _Weather {
   final String? name;
   @override
   final int? cod;
+  @override
+  final String? dt_txt;
 
   @override
   String toString() {
-    return 'Weather(coord: $coord, weather: $weather, base: $base, main: $main, visibility: $visibility, wind: $wind, clouds: $clouds, dt: $dt, sys: $sys, timezone: $timezone, id: $id, name: $name, cod: $cod)';
+    return 'Weather(coord: $coord, weather: $weather, base: $base, main: $main, visibility: $visibility, wind: $wind, clouds: $clouds, dt: $dt, sys: $sys, timezone: $timezone, id: $id, name: $name, cod: $cod, dt_txt: $dt_txt)';
   }
 
   @override
@@ -406,7 +422,8 @@ class _$_Weather implements _Weather {
                 other.timezone == timezone) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.cod, cod) || other.cod == cod));
+            (identical(other.cod, cod) || other.cod == cod) &&
+            (identical(other.dt_txt, dt_txt) || other.dt_txt == dt_txt));
   }
 
   @JsonKey(ignore: true)
@@ -425,7 +442,8 @@ class _$_Weather implements _Weather {
       timezone,
       id,
       name,
-      cod);
+      cod,
+      dt_txt);
 
   @JsonKey(ignore: true)
   @override
@@ -455,7 +473,8 @@ abstract class _Weather implements Weather {
       final int? timezone,
       final int? id,
       final String? name,
-      final int? cod}) = _$_Weather;
+      final int? cod,
+      final String? dt_txt}) = _$_Weather;
 
   factory _Weather.fromJson(Map<String, dynamic> json) = _$_Weather.fromJson;
 
@@ -485,6 +504,8 @@ abstract class _Weather implements Weather {
   String? get name;
   @override
   int? get cod;
+  @override
+  String? get dt_txt;
   @override
   @JsonKey(ignore: true)
   _$$_WeatherCopyWith<_$_Weather> get copyWith =>

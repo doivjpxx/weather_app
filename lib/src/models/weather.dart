@@ -19,6 +19,7 @@ class Weather with _$Weather {
     int? id,
     String? name,
     int? cod,
+    String? dt_txt,
   }) = _Weather;
 
   factory Weather.fromJson(Map<String, dynamic> json) =>

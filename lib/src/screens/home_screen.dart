@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:weather_app/src/providers/weather_state_provider.dart';
 import 'package:weather_app/src/widgets/city_header.dart';
 import 'package:weather_app/src/widgets/current_weather.dart';
+import 'package:weather_app/src/widgets/hourly_widget.dart';
+
+import '../core/consts/text_styles.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -16,6 +20,14 @@ class HomeScreen extends ConsumerWidget {
         error: (e) {},
         data: (weather) {
           return weather;
+        });
+
+    final weatherDaily = ref.watch(weatherDailyNotifierProvider).when(
+        initial: () {},
+        loading: () {},
+        error: (e) {},
+        data: (weather) {
+          return weather.list;
         });
 
     return Scaffold(
@@ -55,29 +67,31 @@ class HomeScreen extends ConsumerWidget {
                       padding: const EdgeInsets.symmetric(
                           vertical: 2.0, horizontal: 16.0),
                       child: Text(
-                        "Today",
+                        "Next hours",
+                        style: daytimeStyle,
                       )),
                   SizedBox(
                       height: 180,
                       width: MediaQuery.of(context).size.width - 125,
                       child: ListView.builder(
-                          itemCount: 7,
+                          scrollDirection: Axis.horizontal,
+                          itemCount:
+                              weatherDaily == null ? 0 : weatherDaily.length,
                           itemBuilder: (context, index) {
-                            return Container();
+                            if (weatherDaily == null) return Container();
+                            return HourlyCard(
+                                date: weatherDaily[index].dt_txt.toString(),
+                                temp: weatherDaily[index].main!.temp.toString(),
+                                iconId: weatherDaily[index]
+                                    .weather![0]
+                                    .icon
+                                    .toString(),
+                                dt: weatherDaily[index].dt.toString(),
+                                index: index);
                           })),
-                  Container(
-                    margin: const EdgeInsets.all(12),
-                    height: 350,
-                    padding: const EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                        color: Colors.deepPurple[50],
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Column(children: [
-                      Text(
-                        "Forecast for 7 days: ",
-                      )
-                    ]),
-                  )
+                  const SizedBox(
+                    height: 30,
+                  ),
                 ],
               )
             : Container());

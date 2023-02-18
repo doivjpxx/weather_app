@@ -32,6 +32,7 @@ _$_Weather _$$_WeatherFromJson(Map<String, dynamic> json) => _$_Weather(
       id: json['id'] as int?,
       name: json['name'] as String?,
       cod: json['cod'] as int?,
+      dt_txt: json['dt_txt'] as String?,
     );
 
 Map<String, dynamic> _$$_WeatherToJson(_$_Weather instance) =>
@@ -49,6 +50,7 @@ Map<String, dynamic> _$$_WeatherToJson(_$_Weather instance) =>
       'id': instance.id,
       'name': instance.name,
       'cod': instance.cod,
+      'dt_txt': instance.dt_txt,
     };
 
 _$_Coord _$$_CoordFromJson(Map<String, dynamic> json) => _$_Coord(
